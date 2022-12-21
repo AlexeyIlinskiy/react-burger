@@ -1,10 +1,12 @@
+//Страница профиля пользователя /profile
+
 import styles from './profile.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import { logout, updateUser } from '../../services/actions/user';
+import { logout, updateUser } from '../../services/actions/user'; //Функции для выхода и обновления информации о пользователе
 
 export function ProfilePage () {
   const dispatch = useDispatch();
@@ -45,7 +47,7 @@ export function ProfilePage () {
   
   
   return (
-    <section className={`${styles.container} pl-5 pt-20`}>
+    <section className={`${styles.container} pl-5`}>
       <div className={ `${styles.menu} mr-15` }>
         <nav className={styles.nav}>
           <NavLink to='/profile' exact={ true } className={ `${styles.link} text text_type_main-medium text_color_inactive`} activeClassName={ styles.linkActive }>

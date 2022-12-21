@@ -1,0 +1,108 @@
+.container {
+  margin: 122px auto 40px;
+  width: 640px;
+  max-height: 620px;
+  display: flex;
+  flex-direction: column;
+}
+
+.containerModal {
+  margin: 40px;
+}
+
+.number {
+  margin: 0 0 40px;
+  text-align: center;
+}
+
+.title {
+  margin: 0 0 12px;
+}
+
+.status {
+  margin: 0 0 60px;
+}
+
+.done {
+  color: #00CCCC;
+}
+
+.canceled {
+  color: #EC1313;
+}
+
+.list {
+  margin: 24px 0 48px;
+  padding: 0 24px 0 0;
+  max-height: 366px;
+  list-style: none;
+  overflow-y: scroll;
+}
+
+.list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.list::-webkit-scrollbar-track {
+  background-color: #2F2F37;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+  height: 194px;
+}
+
+.item {
+  margin: 0 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item:last-child {
+  margin: 0;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin: 0 16px 0 0;
+  display: flex;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(100deg, #801AB2 0%, #4C4CFF 100%);
+  box-sizing: border-box;
+}
+
+.icon img {
+  margin: auto;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background-color: #000;
+  object-fit: cover;
+}
+
+.price {
+  margin: 0 0 0 16px;
+  display: flex;
+  align-items: center;
+}
+
+.price svg {
+  margin: 0 0 0 9px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer .price {
+  margin: 0;
+}

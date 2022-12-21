@@ -1,5 +1,5 @@
 import styles from './app.module.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
  
@@ -30,9 +30,10 @@ import {
 
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { MainPage, IngredientDetailsPage, RegisterPage, LoginPage,  ForgotPasswordPage, ResetPasswordPage, ProfilePage, OrdersListPage, NotFoundPage, OrdersPage } from '../../pages/index';
+import { MainPage, IngredientDetailsPage, RegisterPage, LoginPage,  ForgotPasswordPage, ResetPasswordPage, ProfilePage, FeedHistoryPage, NotFoundPage, FeedPage, FeedOrderPage } from '../../pages/index';
 import { getUser } from '../../services/actions/user';
 import { ProtectedRoute } from '../protected-route/protected-route';
+import { FeedModal } from '../feed-modal/feed-modal';
 
 
 const App = () => {
@@ -45,6 +46,8 @@ const App = () => {
   const order = useSelector(state => state.order.order);
 
   const { isAuth } = useSelector((store) => store.authReducer);
+
+  const [orderNumber, setOrderNumber] = useState('');
  
  
  
@@ -85,6 +88,11 @@ const App = () => {
       history.push(`/profile/orders/${order.number}`, { background: location });
     }
   }, [order]);
+
+  useEffect(() => {
+    const number = location.pathname.split('/').at(-1);
+    if (number) setOrderNumber(number);
+  }, [location]);
  
   return (
     <div className='app'>
@@ -97,8 +105,11 @@ const App = () => {
             <Route path='/ingredients/:id' exact={ true }>
               <IngredientDetailsPage />
             </Route>
-            <Route path='/orders' exact = { true }>
-              <OrdersPage />
+            <Route path='/feed' exact = { true }>
+              <FeedPage />
+            </Route>
+            <Route path='/feed/:id' exact={ true }>
+              <FeedOrderPage />
             </Route>
             <Route path='/login' exact = { true }>
               <LoginPage />
@@ -112,11 +123,14 @@ const App = () => {
             <Route path='/reset-password' exact = { true }>
               <ResetPasswordPage />
             </Route>
+            <ProtectedRoute path='/profile/orders/:id' exact={ true }>
+              <FeedOrderPage />
+            </ProtectedRoute>
             <ProtectedRoute path='/profile' exact={ true }>
               <ProfilePage />
             </ProtectedRoute>
             <ProtectedRoute path='/profile/orders' exact={ true }>
-              <OrdersListPage />
+              <FeedHistoryPage />
             </ProtectedRoute>
             <Route>
               <NotFoundPage />
@@ -135,6 +149,22 @@ const App = () => {
                 <IngredientDetails />
               </Modal>
             </Route>
+          )}
+
+            {background && (
+            <Route path="/feed/:id" exact={ true }>
+              <Modal onClose={ closeModal } header={`#${orderNumber}`} headerStyle='text text_type_digits-default'>
+                <FeedModal />
+              </Modal>
+            </Route>
+          )}
+
+            {background && (
+            <ProtectedRoute path="/profile/orders/:id" exact={ true }>
+              <Modal onClose={ closeModal } header={`#${orderNumber}`} headerStyle='text text_type_digits-default'>
+                <FeedModal />
+              </Modal>
+            </ProtectedRoute>
           )}
       </DndProvider>
     </div>

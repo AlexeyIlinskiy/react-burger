@@ -6,6 +6,7 @@ import ingredientDetailsReducer from './ingredient';
 import orderReducer from './order';
 import modalsReducer from './modals';
 import authReducer from './user';
+import wsReducer from './wsReducer';
 
 export const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
@@ -13,5 +14,6 @@ export const rootReducer = combineReducers({
   ingredientDetails: ingredientDetailsReducer,
   order: orderReducer,
   modals: modalsReducer,
-  authReducer
+  authReducer,
+  wsReducer
 });

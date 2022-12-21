@@ -1,11 +1,13 @@
-import styles from './orders-list.module.css';
+//Страница Истории заказов пользователя /profile/orders
+import styles from './feed-history.module.css';
 
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-
 import { logout } from '../../services/actions/user';
 
-export function OrdersListPage () {
+import { FeedHistory } from '../../components/feed-history/feed-history'; //Компонент с историей заказов пользователя
+
+export function FeedHistoryPage () {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -29,6 +31,9 @@ export function OrdersListPage () {
       <p className={`${styles.description} text text_type_main-default text_color_inactive`}>
         В этом разделе вы можете изменить свои персональные данные
       </p>
+    </div>
+    <div className={ styles.history }>
+      <FeedHistory />
     </div>
   </section>
   );

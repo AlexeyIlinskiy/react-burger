@@ -1,91 +1,81 @@
 import { getCookie } from './cookies';
 const api = 'https://norma.nomoreparties.space/api';
-
+ 
 //Обрабатываем ошибку
 const checkResponse = (res) => {
-  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+ return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
-
+ 
+//Создадим единый запрос
+const request = (url, options) => {
+ return fetch(url, options).then(checkResponse)
+}
+ 
 //Получаем ингредиенты
-export const getIngredientsApi = () => fetch(`${api}/ingredients`)
-  .then(checkResponse)
-
+export const getIngredientsApi = () => request(`${api}/ingredients`)
+ 
 //Получаем номер заказа
-export const getOrderNumber = (data) => fetch(`${api}/orders`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      ingredients: data
-    }),
-  })
-  .then(checkResponse)
-  .then(data => {
-    if (data?.success) return data.order
-    return Promise.reject(data)});
-
+export const getOrderNumber = (data) => request(`${api}/orders`, {
+ method: 'POST',
+ headers: {'Content-Type': 'application/json',
+ Authorization: `${getCookie('token')}`},
+ body: JSON.stringify({ ingredients: data }),
+})
+ .then((data) => data.order)
+ 
 //Регистрация
-export const signUp = (data) => fetch(`${api}/auth/register`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  })
-    .then(checkResponse)
-
-//Логин      
-export const signIn = (data) => fetch(`${api}/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  })
-    .then(checkResponse)
-
-//Логаут      
-export const signOut = () => fetch(`${api}/auth/logout`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ token: localStorage.getItem('jwt') }),
-  })
-    .then(checkResponse)
-
-//Получаем инфу от пользователя      
-export const getUserInfo = () => fetch(`${api}/auth/user`, {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json',
-    Authorization: `${getCookie('token')}` }
-  })
-    .then(checkResponse)
-
-//Обновляем инфу от пользователя      
-export const updateUserInfo = (data) => fetch(`${api}/auth/user`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json',
-    Authorization: `${getCookie('token')}` },
-    body: JSON.stringify(data),
-  })
-    .then(checkResponse)
-
+export const signUp = (data) => request(`${api}/auth/register`, {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify(data)
+})
+ 
+//Логин     
+export const signIn = (data) => request(`${api}/auth/login`, {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify(data),
+})
+ 
+//Логаут     
+export const signOut = () => request(`${api}/auth/logout`, {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify({ token: localStorage.getItem('jwt') }),
+})
+ 
+//Получаем инфу от пользователя     
+export const getUserInfo = () => request(`${api}/auth/user`, {
+ method: 'GET',
+ headers: { 'Content-Type': 'application/json',
+   Authorization: `${getCookie('token')}` }
+})
+ 
+//Обновляем инфу от пользователя     
+export const updateUserInfo = (data) => request(`${api}/auth/user`, {
+ method: 'PATCH',
+ headers: { 'Content-Type': 'application/json',
+   Authorization: `${getCookie('token')}` },
+ body: JSON.stringify(data)
+})
+ 
 //Забыли пароль
-export const restorePassword = (email) => fetch(`${api}/password-reset`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email }),
-  })
-  .then(checkResponse)
-
+export const restorePassword = (email) => request(`${api}/password-reset`, {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify({ email })
+})
+ 
 //Новый пароль
-export const setNewPassword = (data) => fetch(`${api}/password-reset/reset`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(data),
+export const setNewPassword = (data) => request(`${api}/password-reset/reset`, {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify(data)
 })
-  .then(checkResponse)
-
-//Обновление токена  
-export const updateToken = () => fetch(`${api}/auth/token`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ token: localStorage.getItem('jwt') }),
+ 
+//Обновление токена 
+export const updateToken = () => request(`${api}/auth/token`, {
+ method: 'POST',
+ headers: { 'Content-Type': 'application/json' },
+ body: JSON.stringify({ token: localStorage.getItem('jwt') })
 })
-  .then(checkResponse)

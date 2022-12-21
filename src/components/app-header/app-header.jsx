@@ -23,7 +23,7 @@ function AppHeader() {
          <span className={`${styles.button_text} ml-2 text_type_main-default`}>Конструктор</span>
        </NavLink>
        <NavLink
-         to='/orders'
+         to='/feed'
          className={`${styles.button} pt-4 pr-5 pb-4 pl-5 mr-2`}
          activeClassName={styles.buttonActive}
        >

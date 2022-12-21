@@ -1,3 +1,5 @@
+//Страница регистрации нового пользователя /register
+
 import styles from './register.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -5,7 +7,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
-import {register} from '../../services/actions/user';
+import { register } from '../../services/actions/user'; //Функция регистрации пользователя
 
 export function RegisterPage () {
   const { isAuth } = useSelector((store) => store.authReducer);

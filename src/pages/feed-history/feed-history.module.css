@@ -10,11 +10,11 @@
   flex-direction: column;
   max-width: 320px;
   width: 100%;
-  margin-top: 80px;
+  margin-top: 120px;
 }
 
 .nav {
-  margin: 0 0 80px;
+  margin: 0 0 0px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -36,4 +36,14 @@
 
 .linkActive {
   color: #F2F2F3;
+}
+
+.history {
+  width: 844px;
+  height: 916px;
+  /* margin: 40px 0 0 60px; */
+  padding: 40px 0 0 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

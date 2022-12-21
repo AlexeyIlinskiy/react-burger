@@ -1,11 +1,12 @@
+//Страница для входа в систему /login
+
 import styles from './login.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useLocation } from 'react-router-dom';
 
-
-import { login } from '../../services/actions/user';
+import { login } from '../../services/actions/user'; //Функция для входа в систему
 
 export function LoginPage () {
   const { isAuth } = useSelector((store) => store.authReducer);

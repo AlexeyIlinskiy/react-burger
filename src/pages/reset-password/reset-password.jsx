@@ -1,3 +1,5 @@
+//Страница сброса пароля (ввода нового пароля). /reset-password
+
 import styles from './reset-password.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -5,7 +7,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 
-import { resetPassword } from '../../services/actions/user';
+import { resetPassword } from '../../services/actions/user'; //Функция для замены старого пароля новым с вводом кода из письма
 
 export function ResetPasswordPage () {
   const { isAuth } = useSelector((store) => store.authReducer);

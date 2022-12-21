@@ -1,3 +1,5 @@
+//Страница для восстановления пароля /forgot-password
+
 import styles from './forgot-password.module.css';
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -5,7 +7,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useLocation, Redirect } from 'react-router-dom';
 
-import {sendPasswordEmail} from '../../services/actions/user';
+import {sendPasswordEmail} from '../../services/actions/user'; //Функция отправки письма с кодом для сброса пароля
 
 export function ForgotPasswordPage () {
   const { isAuth } = useSelector((store) => store.authReducer);
